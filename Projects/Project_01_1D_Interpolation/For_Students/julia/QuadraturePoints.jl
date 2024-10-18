@@ -13,6 +13,6 @@ include("equispaced_points.jl")
 include("legendre_poly.jl")
 include("legendre_gauss.jl")
 include("lobatto_gauss.jl")
-#include("lagrange_basis.jl")
+include("lagrange_basis.jl")
 
 end

@@ -79,13 +79,14 @@ function main()
             #Interpolation
             #--------------------------------------------------#
             #Compute Sample Space
-            ξs=zeros(Ns)
-            ξs=range(-1,length=Ns,stop=1)
+            xs=zeros(Ns)
+            xs=range(-1,length=Ns,stop=1)
 
             #=-------------------------------------------------
             Students Include the Lagrange Basis Function
-            (ψ,dψ) = QuadraturePoints.lagrange_basis(Np,Ns,ξ,ξs)
+            (ψ,dψ) = QuadraturePoints.lagrange_basis(Np,Ns,ξ,xs)
             ----------------------------------------------------=#
+            (ψ,dψ) = QuadraturePoints.lagrange_basis(Np,Ns,ξ,xs)
 
             #Compute Expansion Coefficients
             q_coeff=zeros(DFloat,Np)
@@ -107,7 +108,7 @@ function main()
             #Compute Exact Solution
             qe=zeros(DFloat,Ns)
             for i=1:Ns
-                x=ξs[i]
+                x=xs[i]
                 qe[i]=-c*sin(c*x)
             end #i
 
@@ -121,6 +122,7 @@ function main()
 
     closeall
     plot_handle=plot(Narray,l2_norm_interpolation,xlabel="N",ylabel="Error Norm",legend=true,lw=3,yaxis=:log,label=["Lobatto" "Legendre" "Chebyshev" "Equispaced"],title="L2 Derivative Error")
+    savefig(plot_handle, "../plots/deriv1.png")
     display(plot_handle)
 
     #Plot Interpolation

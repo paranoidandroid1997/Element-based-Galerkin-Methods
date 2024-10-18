@@ -80,11 +80,13 @@ function main()
             #Compute Sample Space
             xs=zeros(Ns)
             xs=range(-1,length=Ns,stop=1)
+            println(length(ξ))
 
             #=-------------------------------------------------
             Students Include the Lagrange Basis Function
             (ψ,dψ) = QuadraturePoints.lagrange_basis(Np,Ns,ξ,xs)
             ----------------------------------------------------=#
+            (ψ,dψ) = QuadraturePoints.lagrange_basis(Np,Ns,ξ,xs)
             
             #Compute Expansion Coefficients
             q_coeff=zeros(DFloat,Np)
@@ -123,6 +125,7 @@ function main()
     p3=plot(Narray,l8_norm_interpolation,xlabel="N",ylabel="Error Norm",legend=true,lw=3,yaxis=:log,label=["Lobatto" "Legendre" "Chebyshev" "Equispaced"],title="L∞ Interpolation Error")
     #figure_1 = plot(p1,p2,p3,layout = (1,3))
     figure_1 = plot(p2)
+    savefig(figure_1, "../plots/interp1.png")
     display(figure_1)
 
     #Plot Interpolation

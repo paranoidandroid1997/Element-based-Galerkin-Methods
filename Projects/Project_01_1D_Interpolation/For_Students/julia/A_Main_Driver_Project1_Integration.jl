@@ -86,11 +86,14 @@ function main()
             #Integration
             #--------------------------------------------------#
             #Compute Sample Space
+            xs=zeros(Ns)
+            xs=range(-1,length=Ns,stop=1)
             
             #=-------------------------------------------------
             Students Include the Lagrange Basis Function
-            (ψ,dψ) = QuadraturePoints.lagrange_basis(Np,Ns,ξ,ξq)
+            (ψ,dψ) = QuadraturePoints.lagrange_basis(Np,Ns,ξ,xs)
             ----------------------------------------------------=#
+            (ψ,dψ) = QuadraturePoints.lagrange_basis(Np,Np,ξ, ξq)
 
             #Compute Expansion Coefficients
             q_coeff=zeros(DFloat,Np)
@@ -120,6 +123,7 @@ function main()
     end #ipoints
 
     plot_handle=plot(Narray,l2_norm_integration,xlabel="N",ylabel="Error Norm",legend=true,lw=3,yaxis=:log,label=["Lobatto" "Legendre" "Chebyshev" "Equispaced"],title="L2 Integration Error")
+    savefig(plot_handle, "../plots/integ1.png")
     display(plot_handle)
 
     #Plot Interpolation
