@@ -17,7 +17,7 @@ Monterey, CA 93943
 -------------------------------------------------------------------------------------------------------------
 =#
 
-using Plots, LinearAlgebra, FastGaussQuadrature
+using Plots, LinearAlgebra, FastGaussQuadrature, LaTeXStrings
 
 include("QuadraturePoints.jl")
 
@@ -111,6 +111,28 @@ function main()
                 x=xs[i]
                 qe[i]=-c*sin(c*x)
             end #i
+            if (N == 8 && ipoints == 2)
+                # Plot with dashed line and hollow dots
+                p = plot(xs, qn,
+                    label="approx",
+                    title=L"$\frac{d}{dx}[\cos(\frac{\pi}{2}x)]$",
+                    xlabel="x",
+                    ylabel="f(x)",
+                    linestyle=:dash,           # Set line style to dashed
+                    marker=:circle,            # Set marker to hollow circles
+                    markersize=5,              # Adjust marker size
+                    markerstrokewidth=2,       # Make the marker outline thicker for hollow effect
+                    markercolor=:white,        # Hollow effect with white marker fill
+                    linecolor=:blue)           # Set line color to blue
+                
+                plot!(xs, qe, linewidth=4, label="exact")
+
+                # Optionally, add more features to the plot (like another line or more customization)
+                #plot!(x, cos, label="cos(x)", linestyle=:dash)  # Adding cosine with a dashed line
+
+                # Save the plot
+                savefig(p, "../plots/cos-der-1.png")
+            end
 
             #Compute L1; L2; & L8 Norm
             l1_norm_interpolation[inop,ipoints]=norm(qn-qe,1)/norm(qe,1)
