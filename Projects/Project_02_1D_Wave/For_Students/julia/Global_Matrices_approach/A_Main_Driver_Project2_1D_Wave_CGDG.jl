@@ -30,7 +30,7 @@ using Plots
 include("QuadraturePoints.jl")
 include("element_matrices.jl")
 include("create_grid.jl")
-include("global_matrices.jl")
+#include("global_matrices.jl")
 include("exact_solution.jl")
 include("compute_norms.jl")
 include("ti_LSRK.jl")
@@ -92,6 +92,7 @@ function main()
     #=--------------------Students Add These Files-----------------=#
     #Construct Local Mass and Differentiation Matrices
     #(Me,De,Dwe,Fe) = element_matrices(ψ,dψ,Np,Nq,ωq,DFloat)
+    Me = element_matrices(ψ,dψ,Np,Nq,ωq,DFloat)
     #=--------------------Students Add These Files-----------------=#
     #=--------------------Students Add These Files-----------------=#
 
